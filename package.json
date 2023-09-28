@@ -2,7 +2,8 @@
   "name": "slapshot.ts",
   "version": "1.0.0",
   "description": "unofficial slapshot rebound API wrapper",
-  "main": "lib/index.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "bulid": "tsc",
     "test": "node dist/example"

@@ -15,6 +15,7 @@
       "@enum/*": ["./lib/sdk/enum/*"],
       "@type/*": ["./lib/sdk/type/*"]
     },
+    "declaration": true,
   },
   "include": [
     "lib"
