@@ -4,6 +4,7 @@
   "description": "unofficial slapshot rebound API wrapper",
   "main": "lib/index.ts",
   "scripts": {
+    "bulid": "tsc",
     "test": "node dist/example"
   },
   "repository": {

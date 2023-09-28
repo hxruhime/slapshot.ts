@@ -3,7 +3,7 @@ Unofficial [Slapshot Rebound public API](https://oddshot.notion.site/Slapshot-Pu
 
 ## Example Usage
 ```ts
-import { Slapshot } from 'slapshot.ts';
+import Slapshot from 'slapshot.ts';
 
 const slapshot = new Slapshot({ key: 'your api key' });
 

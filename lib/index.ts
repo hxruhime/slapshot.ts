@@ -12,7 +12,7 @@ import {
     LobbyRequestResponse
 }                          from "@type/lobby";
 
-class Instance {
+class Slapshot {
 
     key: string;
     env: string;
@@ -100,5 +100,5 @@ class Instance {
 
 }
 
-export default Instance;
+export default Slapshot;
 // Path: lib\index.ts
