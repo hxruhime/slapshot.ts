@@ -35,13 +35,13 @@ await getMatchmakingQueue(regions: string[]): Promise<MatchmakingResponse>;
 ### Game
 ```ts
 // get game by id
-await getGame(id: string): Promise<Game>;
+await getGame(id: string): Promise<GameResponse>;
 ```
 
 ### Lobby
 ```ts
 // get lobby by id
-await getLobby(id: string): Promise<Lobby>;
+await getLobby(id: string): Promise<LobbyResponse>;
 
 // get array of matches within a lobby
 await getLobbyMatches(lobbyId: string): Promise<LobbyMatchResponse[]>;

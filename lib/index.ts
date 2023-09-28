@@ -5,6 +5,8 @@ import Regions             from "@enum/regions";
 
 import MatchmakingResponse from "@type/matchmaking";
 
+import GameResponse        from "@type/game";
+
 import {
     LobbyRequest,
     LobbyResponse,
@@ -93,7 +95,7 @@ class Slapshot {
     /////////////////////////
     // Game
     /////////////////////////
-    async getGame(gameId: string): Promise<any> {
+    async getGame(gameId: string): Promise<GameResponse> {
         const response = await this.axios.get(`/games/${gameId}`);
         return response.data;
     }
