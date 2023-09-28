@@ -1,6 +1,6 @@
 import axios               from "axios";
 
-import Environments        from "@/sdk/enum/environments";
+import Environments        from "@enum/environments";
 import Regions             from "@enum/regions";
 
 import MatchmakingResponse from "@type/matchmaking";
@@ -19,7 +19,7 @@ class Instance {
 
     axios: any;
 
-    constructor(options: any) {
+    constructor(options: Options) {
         this.key = options.key;
         this.env = options.env || Environments.api;
 
