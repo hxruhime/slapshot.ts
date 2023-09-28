@@ -47,7 +47,7 @@ await getLobby(id: string): Promise<LobbyResponse>;
 await getLobbyMatches(lobbyId: string): Promise<LobbyMatchResponse[]>;
 
 // create a lobby
-await createLobby(lobbyRequest: LobbyRequest): Promise<LobbyRequestResponse>;
+await createLobby(lobbyRequest: LobbyRequest): Promise<LobbyCreationResponse>;
 
 // delete a lobby
 await deleteLobby(lobbyId: string): Promise<void>;
