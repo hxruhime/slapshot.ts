@@ -8,18 +8,17 @@ import MatchmakingResponse from "@type/matchmaking";
 import GameResponse        from "@type/game";
 
 import {
-    LobbyRequest,
-    LobbyResponse,
+    LobbyCreationResponse,
     LobbyMatchResponse,
-    LobbyRequestResponse
+    LobbyResponse,
+    LobbyRequest,
 }                          from "@type/lobby";
 
 class Slapshot {
+    key   : string;
+    env   : string;
 
-    key: string;
-    env: string;
-
-    axios: any;
+    axios : any;
 
     constructor(options: Options) {
         this.key = options.key;
@@ -49,7 +48,7 @@ class Slapshot {
     async getMatchmakingQueue(regions: any): Promise<MatchmakingResponse> {
         let query = '/matchmaking';
 
-        // validate optional "regions" parameter
+        // validate optional "regions" query parameter
         if (regions) {
 
             if (!Array.isArray(regions)) {
@@ -83,7 +82,7 @@ class Slapshot {
         return response.data;
     }
 
-    async createLobby(lobbyRequest: LobbyRequest): Promise<LobbyRequestResponse> {
+    async createLobby(lobbyRequest: LobbyRequest): Promise<LobbyCreationResponse> {
         const response = await this.axios.post('/lobbies', lobbyRequest);
         return response.data;
     }

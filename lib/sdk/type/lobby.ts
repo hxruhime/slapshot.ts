@@ -19,7 +19,7 @@ type LobbyRequest = {
     }
 }
 
-type LobbyRequestResponse = {
+type LobbyCreationResponse = {
     "success"  : boolean
     "lobby_id" : string,
 }
@@ -106,7 +106,7 @@ type LobbyMatchResponse = {
 
 export {
     LobbyRequest,
-    LobbyRequestResponse,
+    LobbyCreationResponse,
 
     LobbyResponse,
     LobbyMatchResponse,
