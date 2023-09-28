@@ -5,6 +5,13 @@ import Regions             from "@enum/regions";
 
 import MatchmakingResponse from "@type/matchmaking";
 
+import {
+    LobbyRequest,
+    LobbyResponse,
+    LobbyMatchResponse,
+    LobbyRequestResponse
+}                          from "@type/lobby";
+
 class Instance {
 
     key: string;
@@ -34,6 +41,9 @@ class Instance {
         });
     }
 
+    /////////////////////////
+    // Matchmaking
+    /////////////////////////
     async getMatchmakingQueue(regions: any): Promise<MatchmakingResponse> {
         let query = '/matchmaking';
 
@@ -58,5 +68,37 @@ class Instance {
     }
 
 
+    /////////////////////////
+    // Lobby
+    /////////////////////////
+    async getLobby(lobbyId: string): Promise<LobbyResponse> {
+        const response = await this.axios.get(`/lobbies/${lobbyId}`);
+        return response.data;
+    }
+
+    async getLobbyMatches(lobbyId: string): Promise<LobbyMatchResponse[]> {
+        const response = await this.axios.get(`/lobbies/${lobbyId}/matches`);
+        return response.data;
+    }
+
+    async createLobby(lobbyRequest: LobbyRequest): Promise<LobbyRequestResponse> {
+        const response = await this.axios.post('/lobbies', lobbyRequest);
+        return response.data;
+    }
+
+    async deleteLobby(lobbyId: string): Promise<void> {
+        await this.axios.delete(`/lobbies/${lobbyId}`);
+    }
+
+    /////////////////////////
+    // Game
+    /////////////////////////
+    async getGame(gameId: string): Promise<any> {
+        const response = await this.axios.get(`/games/${gameId}`);
+        return response.data;
+    }
+
 }
 
+export default Instance;
+// Path: lib\index.ts
