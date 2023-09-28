@@ -1,6 +1,11 @@
 # slapshot.ts
 Unofficial [Slapshot Rebound public API](https://oddshot.notion.site/Slapshot-Public-API-7df0c5c0e67246aa941d9c7143e458db) wrapper written in TypeScript using [axios](https://axios-http.com).
 
+## Installation
+```bash
+npm install slapshot.ts
+```
+
 ## Example Usage
 ```ts
 import Slapshot from 'slapshot.ts';
