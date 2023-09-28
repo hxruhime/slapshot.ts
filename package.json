@@ -1,7 +1,7 @@
 {
   "name": "slapshot.ts",
-  "version": "1.0.0",
-  "description": "unofficial slapshot rebound API wrapper",
+  "version": "1.0.1",
+  "description": "Unofficial Slapshot Rebound API wrapper",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
