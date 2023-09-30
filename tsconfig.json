@@ -18,7 +18,8 @@
     "declaration": true,
   },
   "include": [
-    "lib"
+    "lib",
+    "example"
   ],
   "exclude": [
     "node_modules",

@@ -1,11 +1,11 @@
 {
   "name": "slapshot.ts",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Unofficial Slapshot Rebound API wrapper",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "bulid": "tsc",
+    "build": "tsc --project tsconfig.json && tsc-alias -p tsconfig.json",
     "test": "node dist/example"
   },
   "repository": {
@@ -24,8 +24,13 @@
   "bugs": {
     "url": "https://github.com/hxruhime/slapshot.ts/issues"
   },
-  "homepage": "https://github.com/hxruhime/slapshot.ts#readme",
+  "homepage": "https://github.com/hxruhime/slapshot.ts",
   "dependencies": {
     "axios": "^1.5.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.0",
+    "dotenv": "^16.3.1",
+    "tsc-alias": "^1.8.8"
   }
 }

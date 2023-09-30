@@ -23,8 +23,8 @@ main();
 ## Instance Options
 ```ts
 interface Options {
-  key  : string; // api key
-  env? : string; // api environment
+  key   : string; // api key
+  env ? : string; // api environment
 }
 // env is 'api' by default, may be set to 'staging'
 ```
@@ -33,20 +33,20 @@ interface Options {
 
 ### Matchmaking
 ```ts
-// get current matchmaking queue | regions ex: ['na-west', 'na-east']
+// get current matchmaking queue | regions ex: ['na-west', 'na-east'] || []
 await getMatchmakingQueue(regions: string[]): Promise<MatchmakingResponse>;
 ```
 
 ### Game
 ```ts
 // get game by id
-await getGame(id: string): Promise<GameResponse>;
+await getGame(gameId: string): Promise<GameResponse>;
 ```
 
 ### Lobby
 ```ts
 // get lobby by id
-await getLobby(id: string): Promise<LobbyResponse>;
+await getLobby(lobbyId: string): Promise<LobbyResponse>;
 
 // get array of matches within a lobby
 await getLobbyMatches(lobbyId: string): Promise<LobbyMatchResponse[]>;
@@ -55,7 +55,7 @@ await getLobbyMatches(lobbyId: string): Promise<LobbyMatchResponse[]>;
 await createLobby(lobbyRequest: LobbyRequest): Promise<LobbyCreationResponse>;
 
 // delete a lobby
-await deleteLobby(lobbyId: string): Promise<void>;
+await deleteLobby(lobbyId: string): Promise<LobbyDeleteResponse>;
 ```
 
 

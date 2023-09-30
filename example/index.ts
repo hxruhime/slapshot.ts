@@ -1,15 +1,18 @@
-import Slapshot from "@/index";
+import * as dotenv from 'dotenv';
+dotenv.config();
+
+import Slapshot from "../lib";
 
 const options: Options = {
-    key: 'YOUR_API_KEY',
-    env: 'api',
+    key: process.env.SLAPSHOT_API_KEY as string,
+    env: 'staging',
 }
 
-const slapshot: Slapshot = new Slapshot(options);
+const slapshot = new Slapshot(options);
 
-const main = async () => {
-    const game = await slapshot.getGame('game id');
-    console.log(game);
-};
+async function main() : Promise<void> {
+    const matchmaking = await slapshot.getMatchmakingQueue([]);
+    console.log(matchmaking);
+}
 
 main();

@@ -1,6 +1,5 @@
 import axios               from "axios";
 
-import Environments        from "@enum/environments";
 import Regions             from "@enum/regions";
 
 import MatchmakingResponse from "@type/matchmaking";
@@ -9,9 +8,11 @@ import GameResponse        from "@type/game";
 
 import {
     LobbyCreationResponse,
+    LobbyDeleteResponse,
     LobbyMatchResponse,
     LobbyResponse,
     LobbyRequest,
+
 }                          from "@type/lobby";
 
 class Slapshot {
@@ -22,19 +23,19 @@ class Slapshot {
 
     constructor(options: Options) {
         this.key = options.key;
-        this.env = options.env || Environments.api;
+        this.env = options.env || 'api';
 
         if (!options.key) {
             throw new Error('Missing API key');
         }
 
         // optional env option must be 'staging' or 'api'
-        if (this.env !== Environments.staging && this.env !== Environments.api) {
+        if (this.env !== 'staging' && this.env !== 'api') {
             throw new Error('Invalid environment');
         }
 
         this.axios = axios.create({
-            baseURL: `${this.env}/api/public`,
+            baseURL: `https://${this.env}.slapshot.gg/api/public`,
             headers: {
                 'Authorization': `Bearer ${this.key}`,
                 'Content-Type': 'application/json',
@@ -87,8 +88,16 @@ class Slapshot {
         return response.data;
     }
 
-    async deleteLobby(lobbyId: string): Promise<void> {
-        await this.axios.delete(`/lobbies/${lobbyId}`);
+    async deleteLobby(lobbyId: string): Promise<LobbyDeleteResponse> {
+        let response;
+
+        try {
+            response = await this.axios.delete(`/lobbies/${lobbyId}`);
+        } catch (error: any) {
+            return { success: error.response.status === 200 };
+        }
+
+        return { success: true };
     }
 
     /////////////////////////
