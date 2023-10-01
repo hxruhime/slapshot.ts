@@ -12,8 +12,8 @@ import Slapshot from 'slapshot.ts';
 
 const slapshot = new Slapshot({ key: 'your api key' });
 
-const main = async () => {
-  const game = await slapshot.getGame('game id');
+async function main() : Promise<void> {
+  const game = await slapshot.getGame('game id') as GameResponse;
   console.log(game);
 };
 
@@ -30,6 +30,7 @@ interface Options {
 ```
 
 # Methods
+#### Types may be found in `lib/sdk/type/` aliased as `@types/`
 
 ### Matchmaking
 ```ts
@@ -40,7 +41,7 @@ await getMatchmakingQueue(regions: string[]): Promise<MatchmakingResponse>;
 ### Game
 ```ts
 // get game by id
-await getGame(gameId: string): Promise<GameResponse>;
+await getGame(gameId: string): Promise<GameResponse | WrapperResponse>;
 ```
 
 ### Lobby
@@ -52,10 +53,10 @@ await getLobby(lobbyId: string): Promise<LobbyResponse>;
 await getLobbyMatches(lobbyId: string): Promise<LobbyMatchResponse[]>;
 
 // create a lobby
-await createLobby(lobbyRequest: LobbyRequest): Promise<LobbyCreationResponse>;
+await createLobby(lobbyRequest: LobbyRequest): Promise<LobbyCreationResponse | WrapperResponse>;
 
 // delete a lobby
-await deleteLobby(lobbyId: string): Promise<LobbyDeleteResponse>;
+await deleteLobby(lobbyId: string): Promise<WrapperResponse>;
 ```
 
 

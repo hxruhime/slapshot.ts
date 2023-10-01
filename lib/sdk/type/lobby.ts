@@ -20,8 +20,8 @@ type LobbyRequest = {
 }
 
 type LobbyCreationResponse = {
-    "success"  : boolean
-    "lobby_id" : string,
+    "success"    : boolean
+    "lobby_id"   : string,
 }
 
 type LobbyResponse = {
@@ -104,16 +104,11 @@ type LobbyMatchResponse = {
     }
 }
 
-// no json response, just a 200 or 403
-type LobbyDeleteResponse = { success: boolean }
-
 export {
     LobbyRequest,
     LobbyCreationResponse,
 
     LobbyResponse,
     LobbyMatchResponse,
-
-    LobbyDeleteResponse,
 }
 // Path: lib\sdk\type\lobby.ts

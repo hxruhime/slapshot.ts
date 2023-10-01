@@ -1,19 +1,22 @@
-import axios               from "axios";
+import axios from "axios";
 
-import Regions             from "@enum/regions";
+import Regions from "@enum/regions";
 
 import MatchmakingResponse from "@type/matchmaking";
 
-import GameResponse        from "@type/game";
+import GameResponse from "@type/game";
 
 import {
     LobbyCreationResponse,
-    LobbyDeleteResponse,
     LobbyMatchResponse,
-    LobbyResponse,
     LobbyRequest,
+    LobbyResponse,
+} from "@type/lobby";
 
-}                          from "@type/lobby";
+type WrapperResponse = {
+    "success" ? : boolean,
+    "data"    ? : string,
+}
 
 class Slapshot {
     key   : string;
@@ -31,7 +34,7 @@ class Slapshot {
 
         // optional env option must be 'staging' or 'api'
         if (this.env !== 'staging' && this.env !== 'api') {
-            throw new Error('Invalid environment');
+            throw new Error('[slapshot.ts] | Invalid environment, may be "staging" or "api"');
         }
 
         this.axios = axios.create({
@@ -41,6 +44,27 @@ class Slapshot {
                 'Content-Type': 'application/json',
             }
         });
+    }
+
+    async request(method: string, url: string, data?: any): Promise<any> {
+        try {
+            const response = await this.axios.request({
+                method,
+                url,
+                data,
+            });
+
+            return response.data;
+        } catch (error: any) {
+
+            switch (error.response.status) {
+                case 403:
+                    return { data: '[slapshot.ts] | Unauthorized access, check your options / request parameters?' };
+                case 404:
+                    return { data: '[slapshot.ts] | Not found, check your options / request parameters?' };
+            }
+
+        }
     }
 
     /////////////////////////
@@ -53,20 +77,19 @@ class Slapshot {
         if (regions) {
 
             if (!Array.isArray(regions)) {
-                throw new Error('Regions must be an array');
+                throw new Error('[slapshot.ts] | Regions must be an array, pass [] for no filter');
             }
 
             for (let region of regions) {
                 if (!Regions[region]) {
-                    throw new Error('Invalid region');
+                    throw new Error('[slapshot.ts] | Invalid region provided, see @enum/regions.ts for valid regions');
                 }
             }
 
             query += `?regions=${regions.join(',')}`;
         }
 
-        const response = await this.axios.get(query);
-        return response.data;
+        return await this.request('GET', query);
     }
 
 
@@ -74,38 +97,39 @@ class Slapshot {
     // Lobby
     /////////////////////////
     async getLobby(lobbyId: string): Promise<LobbyResponse> {
-        const response = await this.axios.get(`/lobbies/${lobbyId}`);
-        return response.data;
+        return await this.request('GET', `/lobbies/${lobbyId}`);
     }
 
     async getLobbyMatches(lobbyId: string): Promise<LobbyMatchResponse[]> {
-        const response = await this.axios.get(`/lobbies/${lobbyId}/matches`);
-        return response.data;
+        return await this.request('GET', `/lobbies/${lobbyId}/matches`);
     }
 
-    async createLobby(lobbyRequest: LobbyRequest): Promise<LobbyCreationResponse> {
-        const response = await this.axios.post('/lobbies', lobbyRequest);
-        return response.data;
-    }
+    async createLobby(lobbyRequest: LobbyRequest): Promise<LobbyCreationResponse | WrapperResponse> {
+        const response = await this.request('POST', '/lobbies', lobbyRequest);
 
-    async deleteLobby(lobbyId: string): Promise<LobbyDeleteResponse> {
-        let response;
-
-        try {
-            response = await this.axios.delete(`/lobbies/${lobbyId}`);
-        } catch (error: any) {
-            return { success: error.response.status === 200 };
+        if (response === undefined) {
+            return { success: false, data: '[slapshot.ts] | Lobby creation failed, did you input valid parameters?' };
         }
 
-        return { success: true };
+        return response;
+    }
+
+    async deleteLobby(lobbyId: string): Promise<WrapperResponse> {
+        const response = await this.request('DELETE', `/lobbies/${lobbyId}`)
+        return { success: response === 'OK', data: response };
     }
 
     /////////////////////////
     // Game
     /////////////////////////
-    async getGame(gameId: string): Promise<GameResponse> {
-        const response = await this.axios.get(`/games/${gameId}`);
-        return response.data;
+    async getGame(gameId: string): Promise<GameResponse | WrapperResponse> {
+        const response = await this.request('GET', `/games/${gameId}`);
+
+        if (response === '') {
+            return { success: false, data: '[slapshot.ts] | Game not found, did you input valid parameters?' };
+        }
+
+        return response;
     }
 
 }
