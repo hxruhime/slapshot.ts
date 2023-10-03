@@ -30,7 +30,7 @@ interface Options {
 ```
 
 # Methods
-#### Types may be found in `lib/sdk/type/` aliased as `@types/`
+#### Types may be found in `lib/sdk/type/` aliased as `@type/`
 
 ### Matchmaking
 ```ts
