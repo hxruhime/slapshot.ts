@@ -1,4 +1,8 @@
-enum Arenas {
+/*
+    * @return { Arena }
+    * @description Arena definitions
+*/
+enum Arena {
     "Slapstadium",
     "Slapville",
     "Slapstadium_Mini",
@@ -12,5 +16,5 @@ enum Arenas {
     "Obstacles_XL",
 }
 
-export default Arenas;
-// Path: lib\enum\arenas.ts
+export default Arena;
+// Path: lib/enum/game/eArena.ts

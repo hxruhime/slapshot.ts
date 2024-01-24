@@ -11,9 +11,10 @@
     "strict": true,
     "esModuleInterop": true,
     "paths": {
-      "@/*": ["./lib/*"],
-      "@enum/*": ["./lib/sdk/enum/*"],
-      "@type/*": ["./lib/sdk/type/*"]
+      "@/*"          : ["./lib/*"],
+      "@enum/*"      : ["./lib/sdk/enum/*"],
+      "@type/*"      : ["./lib/sdk/type/*"],
+      "@interface/*" : ["./lib/sdk/interface/*"],
     },
     "declaration": true,
   },

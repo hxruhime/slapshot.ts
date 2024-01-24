@@ -3,11 +3,11 @@ dotenv.config();
 
 import Slapshot                  from "../lib";
 
-import { LobbyCreationResponse } from "@type/lobby";
+import IOptions                  from "@interface/iOptions";
 
-const options: Options = {
-    key: process.env.SLAPSHOT_API_KEY as string,
-    env: 'staging',
+const options: IOptions = {
+    key : process.env.SLAPSHOT_API_KEY as string,
+    env : 'staging',
 }
 
 const slapshot = new Slapshot(options);
@@ -22,7 +22,6 @@ async function main() : Promise<void> {
     const matchmaking = await slapshot.getMatchmakingQueue([]);
     console.log(matchmaking);
 
-
     /////////////////////////
     // Lobby
     /////////////////////////
@@ -30,9 +29,8 @@ async function main() : Promise<void> {
     // create lobby
     const lobby = await slapshot.createLobby({
         creator_name: "lobby", name: "lobby", password: "lobby", region: 'na-west',
-    }) as LobbyCreationResponse;
+    });
     console.log(lobby);
-
 
     // get lobby by id
     const lobby2 = await slapshot.getLobby(lobby.lobby_id);
@@ -55,6 +53,21 @@ async function main() : Promise<void> {
     const game = await slapshot.getGame('5f9b3b3e-0e1a-4b1a-8b0a-0b9b5b0b0b0b');
     console.log(game);
 
+    ////////////////////////
+    // Player
+    ////////////////////////
+
+    // get a players outfits
+    const playerOutfits = await slapshot.getPlayerOutfit('10');
+    console.log(playerOutfits);
+
+    ////////////////////////
+    // Shop
+    ////////////////////////
+
+    // get the daily shop
+    const dailyShop = await slapshot.getShop();
+    console.log(dailyShop);
 }
 
-main();
+main().then(r => console.log('[slapshot.ts] | Test complete!')).catch(e => console.log(e));

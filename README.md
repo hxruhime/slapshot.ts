@@ -13,14 +13,17 @@ import Slapshot from 'slapshot.ts';
 const slapshot = new Slapshot({ key: 'your api key' });
 
 async function main() : Promise<void> {
-  const game = await slapshot.getGame('game id') as GameResponse;
+  const game = await slapshot.getGame('game id');
   console.log(game);
 };
 
 main();
 ```
 
-## Instance Options
+# Interfaces
+#### Interfaces may be found in `lib/sdk/interface/` aliased as `@interface/`
+
+### API Options
 ```ts
 interface Options {
   key   : string; // api key
@@ -29,34 +32,79 @@ interface Options {
 // env is 'api' by default, may be set to 'staging'
 ```
 
+# Enums
+#### Enums may be found in `lib/sdk/enum/` aliased as `@enum/`
+
+### API
+
+```ts
+// get api environments
+Slapshot.environments();
+```
+
+### Game
+```ts
+// get game modes
+Slapshot.gameModes();
+
+// get matchmaking regions
+Slapshot.regions();
+
+// get arenas
+Slapshot.arenas();
+
+// get game end reasons
+Slapshot.endReasons();
+```
+
+### Cosmetics
+```ts
+// get cosmetics types
+Slapshot.cosmeticTypes();
+
+// get cosmetics rarities
+Slapshot.cosmeticRarities();
+```
+
 # Methods
-#### Types may be found in `lib/sdk/type/` aliased as `@type/`
+#### Types for each response may be found in `lib/sdk/type/` aliased as `@type/`
 
 ### Matchmaking
 ```ts
 // get current matchmaking queue | regions ex: ['na-west', 'na-east'] || []
-await getMatchmakingQueue(regions: string[]): Promise<MatchmakingResponse>;
+await getMatchmakingQueue(regions ? : string[]): Promise<any>;
 ```
 
 ### Game
 ```ts
 // get game by id
-await getGame(gameId: string): Promise<GameResponse | WrapperResponse>;
+await getGame(gameId: string): Promise<any>;
 ```
 
 ### Lobby
 ```ts
 // get lobby by id
-await getLobby(lobbyId: string): Promise<LobbyResponse>;
+await getLobby(lobbyId: string): Promise<any>;
 
 // get array of matches within a lobby
-await getLobbyMatches(lobbyId: string): Promise<LobbyMatchResponse[]>;
+await getLobbyMatches(lobbyId: string): Promise<any>;
 
 // create a lobby
-await createLobby(lobbyRequest: LobbyRequest): Promise<LobbyCreationResponse | WrapperResponse>;
+await createLobby(lobbyRequest: LobbyRequest): Promise<any>;
 
 // delete a lobby
-await deleteLobby(lobbyId: string): Promise<WrapperResponse>;
+await deleteLobby(lobbyId: string): Promise<any>;
 ```
 
+### Player
+```ts
+// get a players outfit
+await getPlayerOutfit(playerId: string): Promise<any>;
+```
+
+### Shop / Cosmetics
+```ts
+// get shop (array of currently for sale cosmetics)
+await getShop(): Promise<any>;
+```
 

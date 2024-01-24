@@ -1,22 +1,18 @@
-import axios from "axios";
+import axios            from "axios";
 
-import Regions from "@enum/regions";
+import IOptions         from "@interface/iOptions";
 
-import MatchmakingResponse from "@type/matchmaking";
+import Environment      from "@enum/api/eEnvironment";
 
-import GameResponse from "@type/game";
+import EEndReason       from "@enum/game/eEndReason";
+import EGameMode        from "@enum/game/eGameMode";
+import ERegion          from "@enum/game/eRegion";
+import EArena           from "@enum/game/eArena";
 
-import {
-    LobbyCreationResponse,
-    LobbyMatchResponse,
-    LobbyRequest,
-    LobbyResponse,
-} from "@type/lobby";
+import ECosmeticRarity  from "@enum/cosmetic/eCosmeticRarity";
+import ECosmeticType    from "@enum/cosmetic/eCosmeticType";
 
-type WrapperResponse = {
-    "success" ? : boolean,
-    "data"    ? : string,
-}
+import { LobbyRequest } from "@type/lobby";
 
 class Slapshot {
     key   : string;
@@ -24,7 +20,7 @@ class Slapshot {
 
     axios : any;
 
-    constructor(options: Options) {
+    constructor(options: IOptions) {
         this.key = options.key;
         this.env = options.env || 'api';
 
@@ -32,9 +28,9 @@ class Slapshot {
             throw new Error('Missing API key');
         }
 
-        // optional env option must be 'staging' or 'api'
-        if (this.env !== 'staging' && this.env !== 'api') {
-            throw new Error('[slapshot.ts] | Invalid environment, may be "staging" or "api"');
+        // check if this.env is a valid Environment
+        if (!this.env || !(this.env in Environment)) {
+            throw new Error('[slapshot.ts] | Invalid environment provided, see @enum/api/eEnvironment.ts for valid environments.');
         }
 
         this.axios = axios.create({
@@ -68,21 +64,43 @@ class Slapshot {
     }
 
     /////////////////////////
+    // Getters - API
+    /////////////////////////
+
+    get environments(): string[] { return Object.keys(Environment); }
+
+    /////////////////////////
+    // Getters - Game
+    /////////////////////////
+
+    get regions(): string[] { return Object.keys(ERegion); }
+
+    get arenas(): string[] { return Object.keys(EArena); }
+
+    get gameModes(): string[] { return Object.keys(EGameMode); }
+
+    get endReasons(): string[] { return Object.keys(EEndReason); }
+
+    /////////////////////////
+    // Getters - Cosmetics
+    /////////////////////////
+
+    get cosmeticRarities(): any { return ECosmeticRarity; }
+
+    get cosmeticTypes(): any { return ECosmeticType; }
+
+    /////////////////////////
     // Matchmaking
     /////////////////////////
-    async getMatchmakingQueue(regions: any): Promise<MatchmakingResponse> {
+    async getMatchmakingQueue(regions? : []): Promise<any> {
         let query = '/matchmaking';
 
         // validate optional "regions" query parameter
         if (regions) {
 
-            if (!Array.isArray(regions)) {
-                throw new Error('[slapshot.ts] | Regions must be an array, pass [] for no filter');
-            }
-
             for (let region of regions) {
-                if (!Regions[region]) {
-                    throw new Error('[slapshot.ts] | Invalid region provided, see @enum/regions.ts for valid regions');
+                if (!ERegion[region]) {
+                    throw new Error('[slapshot.ts] | Invalid region provided, see @enum/game/eRegion.ts for valid regions');
                 }
             }
 
@@ -96,15 +114,15 @@ class Slapshot {
     /////////////////////////
     // Lobby
     /////////////////////////
-    async getLobby(lobbyId: string): Promise<LobbyResponse> {
+    async getLobby(lobbyId: string): Promise<any> {
         return await this.request('GET', `/lobbies/${lobbyId}`);
     }
 
-    async getLobbyMatches(lobbyId: string): Promise<LobbyMatchResponse[]> {
+    async getLobbyMatches(lobbyId: string): Promise<any> {
         return await this.request('GET', `/lobbies/${lobbyId}/matches`);
     }
 
-    async createLobby(lobbyRequest: LobbyRequest): Promise<LobbyCreationResponse | WrapperResponse> {
+    async createLobby(lobbyRequest: LobbyRequest): Promise<any> {
         const response = await this.request('POST', '/lobbies', lobbyRequest);
 
         if (response === undefined) {
@@ -114,7 +132,7 @@ class Slapshot {
         return response;
     }
 
-    async deleteLobby(lobbyId: string): Promise<WrapperResponse> {
+    async deleteLobby(lobbyId: string): Promise<any> {
         const response = await this.request('DELETE', `/lobbies/${lobbyId}`)
         return { success: response === 'OK', data: response };
     }
@@ -122,7 +140,7 @@ class Slapshot {
     /////////////////////////
     // Game
     /////////////////////////
-    async getGame(gameId: string): Promise<GameResponse | WrapperResponse> {
+    async getGame(gameId: string): Promise<any> {
         const response = await this.request('GET', `/games/${gameId}`);
 
         if (response === '') {
@@ -132,7 +150,27 @@ class Slapshot {
         return response;
     }
 
+    /////////////////////////
+    // Player
+    /////////////////////////
+    async getPlayerOutfit(playerId: string): Promise<any> {
+        const response = await this.request('GET', `/players/${playerId}/outfit`);
+
+        if (response === '') {
+            return { success: false, data: '[slapshot.ts] | Player not found, did you input valid parameters?' };
+        }
+
+        return response;
+    }
+
+    /////////////////////////
+    // Shop
+    /////////////////////////
+    async getShop(): Promise<any> {
+        return await this.request('GET', '/shop');
+    }
+
 }
 
 export default Slapshot;
-// Path: lib\index.ts
+// Path: lib/index.ts

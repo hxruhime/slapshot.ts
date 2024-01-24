@@ -1,3 +1,7 @@
+/*
+    * @return { EndReason }
+    * @description Game End Reason definitions
+*/
 enum EndReason {
     "EndOfRegulation",
     "Overtime",
@@ -11,4 +15,4 @@ enum EndReason {
 }
 
 export default EndReason;
-// Path: lib\enum\endReason.ts
+// Path: lib/enum/game/eEndReason.ts
