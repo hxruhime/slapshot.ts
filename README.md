@@ -39,31 +39,31 @@ interface Options {
 
 ```ts
 // get api environments
-Slapshot.environments();
+Slapshot.environments;
 ```
 
 ### Game
 ```ts
 // get game modes
-Slapshot.gameModes();
+Slapshot.gameModes;
 
 // get matchmaking regions
-Slapshot.regions();
+Slapshot.regions;
 
 // get arenas
-Slapshot.arenas();
+Slapshot.arenas;
 
 // get game end reasons
-Slapshot.endReasons();
+Slapshot.endReasons;
 ```
 
 ### Cosmetics
 ```ts
 // get cosmetics types
-Slapshot.cosmeticTypes();
+Slapshot.cosmeticTypes;
 
 // get cosmetics rarities
-Slapshot.cosmeticRarities();
+Slapshot.cosmeticRarities;
 ```
 
 # Methods
