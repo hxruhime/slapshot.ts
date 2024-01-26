@@ -14,6 +14,8 @@ const slapshot = new Slapshot(options);
 
 async function main() : Promise<void> {
 
+    console.log(slapshot.regions)
+
     /////////////////////////
     // Matchmaking
     /////////////////////////

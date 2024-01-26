@@ -73,13 +73,13 @@ class Slapshot {
     // Getters - Game
     /////////////////////////
 
-    get regions(): string[] { return Object.keys(ERegion).filter((item) => { return isNaN(Number(item)); }); }
+    get regions(): string[] { return Object.keys(ERegion).filter((item) => { return isNaN(parseInt(item)); }); }
 
-    get arenas(): string[] { return Object.keys(EArena).filter((item) => { return isNaN(Number(item)); }); }
+    get arenas(): string[] { return Object.keys(EArena).filter((item) => { return isNaN(parseInt(item)); }); }
 
-    get gameModes(): string[] { return Object.keys(EGameMode).filter((item) => { return isNaN(Number(item)); }); }
+    get gameModes(): string[] { return Object.keys(EGameMode).filter((item) => { return isNaN(parseInt(item)); }); }
 
-    get endReasons(): string[] { return Object.keys(EEndReason).filter((item) => { return isNaN(Number(item)); }); }
+    get endReasons(): string[] { return Object.keys(EEndReason).filter((item) => { return isNaN(parseInt(item)); }); }
 
     /////////////////////////
     // Getters - Cosmetics
