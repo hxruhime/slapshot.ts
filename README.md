@@ -90,7 +90,7 @@ await getLobby(lobbyId: string): Promise<any>;
 await getLobbyMatches(lobbyId: string): Promise<any>;
 
 // create a lobby
-await createLobby(lobbyRequest: LobbyRequest): Promise<any>;
+await createLobby(lobbyCreationRequest: LobbyCreationRequest): Promise<any>;
 
 // delete a lobby
 await deleteLobby(lobbyId: string): Promise<any>;

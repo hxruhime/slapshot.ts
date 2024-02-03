@@ -1,4 +1,4 @@
-type LobbyRequest = {
+type LobbyCreationRequest = {
     "region"           : string,
     "name"             : string,
     "password"         : string,
@@ -24,7 +24,7 @@ type LobbyCreationResponse = {
     "lobby_id"   : string,
 }
 
-type LobbyResponse = {
+type TLobby = {
     "uuid"         : string,
     "region"       : string,
     "name"         : string,
@@ -58,7 +58,7 @@ type LobbyResponse = {
     "can_start" : boolean,
 }
 
-type LobbyMatchResponse = {
+type LobbyMatch = {
     "id"         : string,
     "region"     : string,
     "match_type" : string,
@@ -105,10 +105,10 @@ type LobbyMatchResponse = {
 }
 
 export {
-    LobbyRequest,
+    LobbyCreationRequest,
     LobbyCreationResponse,
 
-    LobbyResponse,
-    LobbyMatchResponse,
+    TLobby,
+    LobbyMatch,
 }
 // Path: lib\sdk\type\lobby.ts

@@ -1,10 +1,12 @@
-type ShopItemResponse = {
+import ShopType from "@enum/shop/eShopType";
+
+type ShopItem = {
     "id"                : number,
     "cosmetic_id"       : number,
     "start_time"        : string,
     "end_time"          : string,
     "discount_pct"      : null | number,
-    "shop_type"         : string,
+    "shop_type"         : ShopType,
     "name"              : string,
     "type"              : string,
     "key"               : string,
@@ -19,5 +21,5 @@ type ShopItemResponse = {
     "last_seen"         : string,
 }
 
-export { ShopItemResponse };
+export { ShopItem };
 // Path: lib/sdk/type/shop.ts

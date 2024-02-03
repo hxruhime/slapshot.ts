@@ -12,7 +12,7 @@ import EArena           from "@enum/game/eArena";
 import ECosmeticRarity  from "@enum/cosmetic/eCosmeticRarity";
 import ECosmeticType    from "@enum/cosmetic/eCosmeticType";
 
-import { LobbyRequest } from "@type/lobby";
+import { LobbyCreationRequest } from "@type/tLobby";
 
 class Slapshot {
     key   : string;
@@ -122,8 +122,8 @@ class Slapshot {
         return await this.request('GET', `/lobbies/${lobbyId}/matches`);
     }
 
-    async createLobby(lobbyRequest: LobbyRequest): Promise<any> {
-        const response = await this.request('POST', '/lobbies', lobbyRequest);
+    async createLobby(lobbyCreationRequest: LobbyCreationRequest): Promise<any> {
+        const response = await this.request('POST', '/lobbies', lobbyCreationRequest);
 
         if (response === undefined) {
             return { success: false, data: '[slapshot.ts] | Lobby creation failed, did you input valid parameters?' };

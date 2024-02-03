@@ -1,4 +1,4 @@
-type GameResponse = {
+type TGame = {
 
     "id":         string,
     "region":     string,
@@ -45,5 +45,5 @@ type GameResponse = {
 
 }
 
-export default GameResponse;
+export default TGame;
 // Path: lib\sdk\type\game.ts

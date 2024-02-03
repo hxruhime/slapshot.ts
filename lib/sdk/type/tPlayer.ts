@@ -1,4 +1,4 @@
-type OutfitResponse = {
+type PlayerOutfits = {
     "loadout_home": {
         "hat": {
             "variant"  : string,
@@ -125,5 +125,5 @@ type OutfitResponse = {
     }
 }
 
-export { OutfitResponse };
+export { PlayerOutfits };
 // Path: lib/sdk/type/player.ts

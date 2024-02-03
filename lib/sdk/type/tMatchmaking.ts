@@ -1,4 +1,4 @@
-type MatchmakingResponse = {
+type TMatchmaking = {
     "entities": [
         {
             "players": [
@@ -23,5 +23,5 @@ type MatchmakingResponse = {
     }
 }
 
-export default MatchmakingResponse;
+export default TMatchmaking;
 // Path: lib\sdk\type\matchmaking.ts
