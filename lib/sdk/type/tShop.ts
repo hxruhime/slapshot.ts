@@ -16,8 +16,8 @@ type ShopItem = {
     "rarity_rank"       : number,
     "price"             : number,
     "seconds_remaining" : number,
-    "active"            : true,
-    "has_variants"      : false,
+    "active"            : boolean,
+    "has_variants"      : boolean,
     "last_seen"         : string,
 }
 
