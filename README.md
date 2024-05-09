@@ -100,6 +100,9 @@ await deleteLobby(lobbyId: string): Promise<any>;
 ```ts
 // get a players outfit
 await getPlayerOutfit(playerId: string): Promise<any>;
+
+// get a players slapshot id rom their steam id
+await steamIDtoSlapshotID(steamId: string): Promise<any>;
 ```
 
 ### Shop / Cosmetics

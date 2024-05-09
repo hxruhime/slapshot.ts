@@ -63,6 +63,9 @@ async function main() : Promise<void> {
     const playerOutfits = await slapshot.getPlayerOutfit('10');
     console.log(playerOutfits);
 
+    const steamToSlap = await slapshot.steamIDtoSlapshotID('76561198029416614');
+    console.log(steamToSlap);
+
     ////////////////////////
     // Shop
     ////////////////////////

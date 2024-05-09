@@ -163,6 +163,16 @@ class Slapshot {
         return response;
     }
 
+    async steamIDtoSlapshotID(steamID: string): Promise<any> {
+        const response = await this.request('GET', `/players/steam/${steamID}`);
+
+        if (response === '') {
+            return { success: false, data: '[slapshot.ts] | Player not found, did you input valid parameters?' };
+        }
+
+        return response;
+    }
+
     /////////////////////////
     // Shop
     /////////////////////////
