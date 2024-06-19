@@ -1,6 +1,6 @@
 {
   "name": "slapshot.ts",
-  "version": "1.1.6",
+  "version": "1.1.61",
   "description": "Unofficial Slapshot Rebound API wrapper",
   "main": "dist/lib/index.js",
   "types": "dist/lib/index.d.ts",
@@ -22,9 +22,9 @@
   "author": "David",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/oxycodan/slapshot.ts/issues"
+    "url": "https://github.com/hxruhime/slapshot.ts/issues"
   },
-  "homepage": "https://github.com/oxycodan/slapshot.ts",
+  "homepage": "https://github.com/hxruhime/slapshot.ts",
   "dependencies": {
     "axios": "^1.5.1"
   },
