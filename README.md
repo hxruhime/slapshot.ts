@@ -111,3 +111,5 @@ await steamIDtoSlapshotID(steamId: string): Promise<any>;
 await getShop(): Promise<any>;
 ```
 
+# Repository Stats
+![Alt](https://repobeats.axiom.co/api/embed/ccdbc3a31ef850238f0cfff1479687f56a9d19d4.svg "Repobeats analytics image")
